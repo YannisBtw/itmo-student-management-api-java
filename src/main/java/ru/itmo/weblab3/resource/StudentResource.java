@@ -5,16 +5,22 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import ru.itmo.weblab3.dto.StudentCreateDto;
 import ru.itmo.weblab3.dto.StudentResponseDto;
 import ru.itmo.weblab3.dto.StudentUpdateDto;
 import ru.itmo.weblab3.dto.StudentPatchDto;
 import ru.itmo.weblab3.service.StudentService;
+import ru.itmo.weblab3.util.Logs;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
@@ -24,6 +30,23 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @Consumes(MediaType.APPLICATION_JSON)
 @SecurityRequirement(name = "bearerAuth")
 public class StudentResource {
+
+    private static final Logger LOG =
+            Logger.getLogger(StudentResource.class.getName());
+
+    @Context
+    private SecurityContext securityContext;
+
+    private String actor() {
+        Principal principal =
+                securityContext == null
+                        ? null
+                        : securityContext.getUserPrincipal();
+
+        return principal == null
+                ? "anonymous"
+                : principal.getName();
+    }
 
     private static final DateTimeFormatter DATE_FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -83,6 +106,13 @@ public class StudentResource {
     public Response createStudent(@Valid StudentCreateDto dto) {
         StudentResponseDto createdStudent = studentService.create(dto);
 
+        LOG.info(
+                "Student created: id="
+                        + createdStudent.getId()
+                        + ", by="
+                        + Logs.clean(actor())
+        );
+
         return Response
                 .status(Response.Status.CREATED)
                 .entity(createdStudent)
@@ -97,6 +127,13 @@ public class StudentResource {
     ) {
         StudentResponseDto updatedStudent = studentService.update(id, dto);
 
+        LOG.info(
+                "Student updated (PUT): id="
+                        + id
+                        + ", by="
+                        + Logs.clean(actor())
+        );
+
         return Response.ok(updatedStudent).build();
     }
 
@@ -104,6 +141,13 @@ public class StudentResource {
     @Path("/{id}")
     public Response deleteStudent(@PathParam("id") Long id) {
         studentService.delete(id);
+
+        LOG.info(
+                "Student deleted: id="
+                        + id
+                        + ", by="
+                        + Logs.clean(actor())
+        );
 
         return Response.noContent().build();
     }
@@ -115,6 +159,13 @@ public class StudentResource {
             @Valid StudentPatchDto dto
     ) {
         StudentResponseDto updatedStudent = studentService.patch(id, dto);
+
+        LOG.info(
+                "Student updated (PATCH): id="
+                        + id
+                        + ", by="
+                        + Logs.clean(actor())
+        );
 
         return Response.ok(updatedStudent).build();
     }

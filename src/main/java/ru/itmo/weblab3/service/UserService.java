@@ -6,6 +6,8 @@ import ru.itmo.weblab3.entity.Role;
 import ru.itmo.weblab3.entity.User;
 import ru.itmo.weblab3.exception.ConflictException;
 import ru.itmo.weblab3.repository.UserRepository;
+import ru.itmo.weblab3.util.Logs;
+
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -13,9 +15,13 @@ import jakarta.transaction.Transactional;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class UserService {
+
+    private static final Logger LOG =
+            Logger.getLogger(UserService.class.getName());
 
     @Inject
     UserRepository userRepository;
@@ -42,6 +48,11 @@ public class UserService {
         user.setRole(Role.USER);
 
         userRepository.save(user);
+
+        LOG.info(
+                "User registered: username="
+                        + Logs.clean(username)
+        );
 
         return toDto(user);
     }

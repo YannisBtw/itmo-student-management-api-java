@@ -10,12 +10,18 @@ import ru.itmo.weblab3.entity.User;
 import ru.itmo.weblab3.exception.AuthenticationException;
 import ru.itmo.weblab3.repository.RefreshTokenRepository;
 import ru.itmo.weblab3.repository.UserRepository;
+import ru.itmo.weblab3.util.Logs;
+
 
 import java.time.Instant;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class AuthService {
+
+    private static final Logger LOG =
+            Logger.getLogger(AuthService.class.getName());
 
     @Inject
     UserRepository userRepository;
@@ -32,13 +38,42 @@ public class AuthService {
     @Transactional
     public TokenResponseDto login(LoginRequestDto req) {
         String login = req.getUsernameOrEmail().trim();
-        User user = userRepository.findByUsername(login)
-                .or(() -> userRepository.findByEmail(login.toLowerCase(Locale.ROOT)))
-                .orElseThrow(() -> new AuthenticationException("Invalid credentials"));
 
-        if (!passwordService.matches(req.getPassword(), user.getPasswordHash())) {
-            throw new AuthenticationException("Invalid credentials");
+        User user = userRepository.findByUsername(login)
+                .or(() -> userRepository.findByEmail(
+                        login.toLowerCase(Locale.ROOT)
+                ))
+                .orElseThrow(() -> {
+                    LOG.warning(
+                            "Login failed: user=" + Logs.clean(login)
+                    );
+
+                    return new AuthenticationException(
+                            "Invalid credentials"
+                    );
+                });
+
+        if (!passwordService.matches(
+                req.getPassword(),
+                user.getPasswordHash()
+        )) {
+            LOG.warning(
+                    "Login failed: invalid password for user="
+                            + Logs.clean(user.getUsername())
+            );
+
+            throw new AuthenticationException(
+                    "Invalid credentials"
+            );
         }
+
+        LOG.info(
+                "Login successful: user="
+                        + Logs.clean(user.getUsername())
+                        + ", role="
+                        + user.getRole()
+        );
+
         return issueTokens(user);
     }
 
@@ -58,6 +93,10 @@ public class AuthService {
 
         // rotation: revoke old, issue new
         refreshTokenRepository.markRevoked(stored);
+        LOG.info(
+                "Refresh token rotated: user="
+                        + Logs.clean(stored.getUser().getUsername())
+        );
         return issueTokens(stored.getUser());
     }
 
