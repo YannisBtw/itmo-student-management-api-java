@@ -74,6 +74,6 @@ public class JwtAuthenticationFilter implements ContainerRequestFilter {
         if (path.startsWith("/")) {
             path = path.substring(1);
         }
-        return path.startsWith("auth/");
+        return path.startsWith("auth/") || path.equals("openapi.json") || path.equals("openapi.yaml");
     }
 }

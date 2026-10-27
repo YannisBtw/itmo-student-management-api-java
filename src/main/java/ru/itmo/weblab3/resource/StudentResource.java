@@ -16,10 +16,13 @@ import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 
 @Path("/students")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@SecurityRequirement(name = "bearerAuth")
 public class StudentResource {
 
     private static final DateTimeFormatter DATE_FORMATTER =
