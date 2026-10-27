@@ -16,7 +16,7 @@
 
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action"
-                      value="create"/>
+                      value="none"/>
         </properties>
 
     </persistence-unit>
