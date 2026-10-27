@@ -17,7 +17,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String fullName;
 
     @Column(nullable = false, unique = true)
@@ -38,6 +38,7 @@ public class Student {
     @Column(nullable = false)
     private Boolean isForeign;
 
+    @Column(length = 255)
     private String notes;
 
     protected Student() {

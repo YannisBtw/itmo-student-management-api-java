@@ -7,11 +7,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class StudentUpdateDto {
 
+    @Size(max = 255)
     @NotBlank
     private String fullName;
 
@@ -41,6 +43,7 @@ public class StudentUpdateDto {
     @NotNull
     private Boolean isForeign;
 
+    @Size(max = 255)
     private String notes;
 
     public String getFullName() {
@@ -91,12 +94,12 @@ public class StudentUpdateDto {
         this.moveInDate = moveInDate;
     }
 
-    public Boolean getIsForeign() {
+    public Boolean getForeign() {
         return isForeign;
     }
 
-    public void setIsForeign(Boolean isForeign) {
-        this.isForeign = isForeign;
+    public void setForeign(Boolean foreign) {
+        isForeign = foreign;
     }
 
     public String getNotes() {

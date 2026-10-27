@@ -14,6 +14,10 @@ public class RegisterRequestDto {
     @NotBlank
     @Email
     @Size(max = 255)
+    @Pattern(
+            regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+            message = "Email must contain a valid domain, for example user@example.com"
+    )
     private String email;
 
     @NotBlank

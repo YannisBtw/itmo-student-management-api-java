@@ -7,12 +7,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class StudentCreateDto {
 
     @NotBlank
+    @Size(max = 255)
     private String fullName;
 
     @NotNull
@@ -41,6 +43,7 @@ public class StudentCreateDto {
     @NotNull
     private Boolean isForeign;
 
+    @Size(max = 255)
     private String notes;
 
     public String getFullName() {
