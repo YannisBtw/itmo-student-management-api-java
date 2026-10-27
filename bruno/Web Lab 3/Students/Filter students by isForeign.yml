@@ -1,0 +1,22 @@
+info:
+  name: Filter students by isForeign
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: "{{baseUrl}}/students?isForeign=false"
+  params:
+    - name: isForeign
+      value: "false"
+      type: query
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhZmY2NmNjMy0xYWI2LTQ1ZWEtOTc1Ni0zMmIxNjk1NmUzOGEiLCJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3OTMwNTk4NDEsImV4cCI6MTc5MzA2MDc0MX0.HGyPyOlOij16FjaC2kVnOiWb5043vH-lW07RWhoEMp0Yc1QGFW7qtvGxNhQwuJAhyI5aH6X1mJI8XOc7AS5Nuw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

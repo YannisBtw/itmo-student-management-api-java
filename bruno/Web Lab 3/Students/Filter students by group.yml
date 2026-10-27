@@ -1,0 +1,22 @@
+info:
+  name: Filter students by group
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/students?group=P"
+  params:
+    - name: group
+      value: P
+      type: query
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyY2Q2ZmE2Mi01NWEwLTQ4MTktOWZlZC0yYjM1MGRlYjk3ZDMiLCJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3OTMwNTkwODQsImV4cCI6MTc5MzA1OTk4NH0.XCk2ust6fCem72LXc23Zx2f0U0Kwvjs_wO3S04Me9GGoqE3RsfuSb1Dvy4g4v_a9odCHq_8g81046KGQxSlZMA
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

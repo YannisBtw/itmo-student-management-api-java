@@ -1,0 +1,31 @@
+info:
+  name: Update student with PUT as ADMIN
+  type: http
+  seq: 11
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/students/2"
+  body:
+    type: json
+    data: |-
+      {
+        "fullName": "Петров Пётр Петрович",
+        "isuId": 505116,
+        "group": "P3120",
+        "dormitoryNumber": 8,
+        "roomNumber": 420,
+        "moveInDate": "2026-09-02",
+        "isForeign": false,
+        "notes": "Обновлено через PUT"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhZmY2NmNjMy0xYWI2LTQ1ZWEtOTc1Ni0zMmIxNjk1NmUzOGEiLCJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3OTMwNTk4NDEsImV4cCI6MTc5MzA2MDc0MX0.HGyPyOlOij16FjaC2kVnOiWb5043vH-lW07RWhoEMp0Yc1QGFW7qtvGxNhQwuJAhyI5aH6X1mJI8XOc7AS5Nuw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

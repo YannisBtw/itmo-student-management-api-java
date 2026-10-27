@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="icon" href="static/favicon.ico">
+</head>
+
+<body>
+
+<header class="page-header">
+    <h1 id="authTitle">Вход</h1>
+</header>
+
+<main>
+    <p id="authMessage" class="message error" hidden></p>
+
+    <form id="loginForm">
+        <div class="form-field">
+            <label for="loginUsername">Логин или email</label>
+            <input
+                    type="text"
+                    id="loginUsername"
+                    autocomplete="username"
+                    required
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="loginPassword">Пароль</label>
+            <input
+                    type="password"
+                    id="loginPassword"
+                    autocomplete="current-password"
+                    required
+            >
+        </div>
+
+        <button type="submit">Войти</button>
+        <button type="button" id="showRegister" class="link-button">
+            Нет аккаунта? Зарегистрироваться
+        </button>
+    </form>
+
+    <form id="registerForm" hidden>
+        <div class="form-field">
+            <label for="registerUsername">Логин</label>
+            <input
+                    type="text"
+                    id="registerUsername"
+                    minlength="3"
+                    maxlength="64"
+                    autocomplete="username"
+                    required
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="registerEmail">Email</label>
+            <input
+                    type="email"
+                    id="registerEmail"
+                    maxlength="255"
+                    autocomplete="email"
+                    required
+            >
+        </div>
+
+        <div class="form-field">
+            <label for="registerPassword">Пароль</label>
+            <input
+                    type="password"
+                    id="registerPassword"
+                    pattern="(?=.*[A-Za-z])(?=.*[0-9]).{8,72}"
+                    title="От 8 до 72 символов, минимум одна буква и одна цифра"
+                    autocomplete="new-password"
+                    required
+            >
+        </div>
+
+        <button type="submit">Зарегистрироваться</button>
+        <button type="button" id="showLogin" class="link-button">
+            Уже есть аккаунт? Войти
+        </button>
+    </form>
+</main>
+
+<script src="static/js/auth.js"></script>
+<script src="static/js/login.js"></script>
+
+</body>
+
+</html>

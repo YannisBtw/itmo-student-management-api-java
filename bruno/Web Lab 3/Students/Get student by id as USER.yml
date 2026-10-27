@@ -1,0 +1,18 @@
+info:
+  name: Get student by id as USER
+  type: http
+  seq: 12
+
+http:
+  method: GET
+  url: "{{baseUrl}}/students/1"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJlMzU4NjM5YS1kYTE4LTQ3YzMtOGU0Ny1iOGMyNzRhYzJkOTciLCJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3OTMwNTk3NDIsImV4cCI6MTc5MzA2MDY0Mn0.6a34F0s8snAfzVfCCNzK21AwSpiCYrvo38SM8pQic1iV6zY0xQXc4kznOzn7LOA6xDBaqtznioFfTWhZwTSRaw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

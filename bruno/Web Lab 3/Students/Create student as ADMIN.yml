@@ -1,0 +1,31 @@
+info:
+  name: Create student as ADMIN
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/students"
+  body:
+    type: json
+    data: |-
+      {
+        "fullName": "Сидоров Сидор Сидорович",
+        "isuId": 505117,
+        "group": "P3120",
+        "dormitoryNumber": 8,
+        "roomNumber": 414,
+        "moveInDate": "2026-09-03",
+        "isForeign": false,
+        "notes": "Создан администратором"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJhZmU5ZTAyMS03M2ViLTQ1ZTQtYjY0Zi1kZDFkNzUzNzEwYzEiLCJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3OTMwNTc2OTIsImV4cCI6MTc5MzA1ODU5Mn0.E9NZ683M6La5dhp8IM5bjSvwIgPAbF5jvcaJgj9MWaa3bZi7tek3HutZNGug-Fg1YoBAk5uOub9ucMe0kE1bqw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

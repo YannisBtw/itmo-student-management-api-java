@@ -1,0 +1,31 @@
+info:
+  name: Create student as USER
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/students"
+  body:
+    type: json
+    data: |-
+      {
+        "fullName": "Сидоров Сидор Сидорович",
+        "isuId": 505117,
+        "group": "P3120",
+        "dormitoryNumber": 8,
+        "roomNumber": 414,
+        "moveInDate": "2026-09-03",
+        "isForeign": false,
+        "notes": "Проверка прав USER"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIzYjkwODJjMS00MTZhLTRiZTAtOTBiMC0zZTUxNGQ3NjA1ODkiLCJzdWIiOiJ0ZXN0dXNlciIsInJvbGUiOiJVU0VSIiwidHlwZSI6ImFjY2VzcyIsImlhdCI6MTc5MzA1NzAzNSwiZXhwIjoxNzkzMDU3OTM1fQ.2Vy8xPTk1yJXUVMf_6SjUAt6cX3pDcBsVQxkp1duK39TGZBEXdLVaBEdVyFZjYBT5ryA9DqDPIdHpWFkI7iqOw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
